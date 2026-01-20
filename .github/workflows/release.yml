@@ -9,14 +9,8 @@ on:
     inputs:
       name:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
-        required: true
-        # The data type of the input
-        type: string
-
+        description: 'Release'
+        
 # Releases need permissions to read and write the repository contents.
 # GitHub considers creating releases and uploading assets as writing contents.
 permissions:
@@ -43,7 +37,7 @@ jobs:
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5.0.0
         with:
-          args: release --clean
+          args: release --clean --skip=publish
         env:
           # GitHub sets the GITHUB_TOKEN secret automatically.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
